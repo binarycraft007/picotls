@@ -1,0 +1,15 @@
+.{
+    .name = "picotls",
+    .version = "0.0.1",
+    .paths = .{
+        "src",
+        "build.zig",
+        "build.zig.zon",
+    },
+    .dependencies = .{
+        .mbedtls = .{
+            .url = "git+https://codeberg.org/allyourcodebase/mbedtls#7db47f2e84acef7963437d348cf74f5154deed3c",
+            .hash = "12209d2192f98f03c0f7e102c49cbd58c761d2ac0c7731335bde96daa43e97f6c5e0",
+        },
+    },
+}
