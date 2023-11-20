@@ -98,7 +98,7 @@
     #include <signal.h>
 #endif
 
-#if defined(_WIN32) || defined(__WIN32__) || defined(__WINDOWS__)
+#if defined(_WIN32)
     #define CUTEST_WIN__     1
     #include <windows.h>
     #include <io.h>

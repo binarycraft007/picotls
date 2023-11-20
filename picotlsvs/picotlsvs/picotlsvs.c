@@ -9,7 +9,7 @@
 #include "../../include/picotls/asn1.h"
 #include "../../include/picotls/pembase64.h"
 
-#ifdef _WINDOWS
+#ifdef _WIN32
 #define PICOTLS_CERT_STORE "..\\..\\t\\assets\\test-ca.crt"
 #else 
 #define PICOTLS_CERT_STORE "../../t/assets/test-ca.crt"

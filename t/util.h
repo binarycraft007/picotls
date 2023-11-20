@@ -441,7 +441,7 @@ static inline int normalize_txt(uint8_t *p, size_t len)
 /* The ptls_repeat_while_eintr macro will repeat a function call (block) if it is interrupted (EINTR) before completion. If failing
  * for other reason, the macro executes the exit block, such as either { break; } or { goto Fail; }.
  */
-#ifdef _WINDOWS
+#ifdef _WIN32
 #define repeat_while_eintr(expr, exit_block)                                                                                       \
     while ((expr) < 0) {                                                                                                           \
         exit_block;                                                                                                                \

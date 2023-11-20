@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  */
 
-#ifdef _WINDOWS
+#ifdef _WIN32
 #include "wincompat.h"
 #else
 #include <unistd.h>
@@ -56,11 +56,13 @@
 #include "./libaegis.h"
 #endif
 
-#ifdef _WINDOWS
+#ifdef _WIN32
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
 #endif
+#ifdef _MSC_VER
 #pragma warning(disable : 4996)
+#endif
 #endif
 
 #if !defined(LIBRESSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER >= 0x10100000L

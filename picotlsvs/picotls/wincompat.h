@@ -3,10 +3,15 @@
 
 #include <stdint.h>
 #define ssize_t int
-#include <Winsock2.h>
+#include <winsock2.h>
 #include <ws2tcpip.h>
 #include <malloc.h>
 
+#if defined(__MINGW32__) || defined(__MINGW64__)
+#include <sys/time.h>
+#endif
+
+#ifdef _MSC_VER
 #ifndef gettimeofday
 #define gettimeofday wintimeofday
 
@@ -27,6 +32,7 @@ int wintimeofday(struct timeval *tv, struct timezone *tz);
 #ifndef strcasecmp
 #define strcasecmp _stricmp
 #endif
+#endif /* _MSC_VER */
 
 #ifdef __cplusplus
 } /* extern "C" */

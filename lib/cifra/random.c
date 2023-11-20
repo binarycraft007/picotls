@@ -26,7 +26,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#ifdef _WINDOWS
+#ifdef _WIN32
 #include "wincompat.h"
 #else
 #include <unistd.h>
@@ -35,31 +35,7 @@
 #include "picotls.h"
 #include "picotls/minicrypto.h"
 #include <stdio.h>
-#ifdef _WINDOWS
-#ifdef _WINDOWS_XP
-/* The modern BCrypt API is only available on Windows Vista and later versions.
- * If compiling on Windows XP, we need to use the olded "wincrypt" API */
-#include <wincrypt.h>
-
-static void read_entropy(uint8_t *entropy, size_t size)
-{
-    HCRYPTPROV hCryptProv = 0;
-    BOOL ret = FALSE;
-
-    if (CryptAcquireContext(&hCryptProv, NULL, NULL, PROV_RSA_FULL, 0)) {
-        ret = CryptGenRandom(hCryptProv, (DWORD)size, entropy);
-        (void)CryptReleaseContext(hCryptProv, 0);
-    }
-
-    if (ret == FALSE) {
-        perror("ptls_minicrypto_random_bytes: could not use CryptGenRandom");
-        abort();
-    }
-}
-#else
-/* The old "Wincrypt" API requires access to default security containers.
- * This can cause access control errors on some systems. We prefer
- * to use the modern BCrypt API when available */
+#ifdef _WIN32
 #include <bcrypt.h>
 
 static void read_entropy(uint8_t *entropy, size_t size)
@@ -80,7 +56,6 @@ static void read_entropy(uint8_t *entropy, size_t size)
         abort();
     }
 }
-#endif
 #else
 static void read_entropy(uint8_t *entropy, size_t size)
 {
